@@ -5,6 +5,8 @@ import binascii, os
 import bottle
 from bottle import response, request
 
+from binascii import unhexlify
+
 @bottle.hook('after_request')
 def enable_cors():
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -31,8 +33,11 @@ def create_task():
 
     s = request.body.read()
 
-    with open('tmp.txt') as f:
-        f.write(s)
+    import base64
+    b = base64.b64decode(s)
+
+    with open('tmp.jpg', 'wb') as output:
+        output.write(unhexlify(''.join(format(i[2:], '>02s') for i in b)))
 
     return task_id
 
