@@ -13,12 +13,14 @@ def enable_cors():
 
 @bottle.get('/')
 def health():
-    response.content_type = 'text/plain'
+    response.content_type = 'application/json'
     if os.path.isdir("./tasks"):
-        return 'ok'
+        return { 'status': 'ok' }
     else:
-        return 'tasks directory does not exist'
-
+        return { 
+            'status': 'bad', 
+            'message': 'tasks directory does not exist'
+	}
 @bottle.post('/task')
 def create_task():
     response.content_type = 'text/plain'
