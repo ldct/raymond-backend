@@ -29,7 +29,10 @@ def create_task():
     with open('./tasks/' + task_id + '.status', 'a') as f:
         f.write('queued')
 
-    print(request.body.read())
+    s = request.body.read()
+
+    with open('tmp.txt') as f:
+        f.write(s)
 
     return task_id
 
