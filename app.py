@@ -17,13 +17,13 @@ def health():
     if os.path.isdir("./tasks"):
         return { 'status': 'ok' }
     else:
-        return { 
-            'status': 'bad', 
+        return {
+            'status': 'bad',
             'message': 'tasks directory does not exist'
 	}
 @bottle.post('/task')
 def create_task():
-    response.content_type = 'text/plain'
+    response.content_type = 'application/json'
 
     task_id = binascii.hexlify(os.urandom(8))
     with open('./tasks/' + task_id + '.status', 'a') as f:
@@ -33,7 +33,8 @@ def create_task():
 
 @bottle.get('/tasks')
 def list_tokens():
-    return ' '.join(os.listdir('./tasks'))
+    response.content_type = 'application/json'
+    return os.listdir('./tasks')
 
 @bottle.get('/task/<name>')
 def get_task(name):
