@@ -38,4 +38,7 @@ def get_task(name):
     with open ('./tasks/' + name + '.status', 'r') as f:
         return '\n'.join(f.readlines())
 
-bottle.run(host='localhost', port=8080, debug=True)
+try:
+    bottle.run(host='0.0.0.0', port=80, debug=False )
+except:
+    bottle.run(host='localhost', port=8080, debug=True)
