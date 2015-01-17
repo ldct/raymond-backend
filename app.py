@@ -33,6 +33,10 @@ def create_task():
 
     s = request.body.read()
     print(s)
+
+    with open('tmp.jpg', 'wb') as f:
+        f.write(s)
+
     return task_id
 
 @bottle.get('/tasks')
