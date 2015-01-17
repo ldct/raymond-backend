@@ -32,13 +32,7 @@ def create_task():
         f.write('queued')
 
     s = request.body.read()
-
-    import base64
-    b = base64.b64decode(s)
-
-    with open('tmp.jpg', 'wb') as output:
-        output.write(unhexlify(''.join(format(i[2:], '>02s') for i in b)))
-
+    print(s)
     return task_id
 
 @bottle.get('/tasks')
