@@ -29,8 +29,7 @@ def create_task():
     with open('./tasks/' + task_id + '.status', 'a') as f:
         f.write('queued')
 
-    img = request.files.get('image')
-    img.save('tmp.jpg', overwrite=True)
+    print(request.body.read())
 
     return task_id
 
