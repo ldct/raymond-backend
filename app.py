@@ -31,7 +31,7 @@ def create_task():
 
     os.mkdir('./task_data/' + task_id)
     with open('./task_data/' + task_id + '/status', 'a') as f:
-        f.write('queued')
+        f.write('queued\n')
 
     s = request.body.read()
     print(s)
@@ -41,14 +41,40 @@ def create_task():
 
     return task_id
 
+@bottle.get('/task_data/<filename:path>')
+def get_task_data(filename):
+    return bottle.static_file(filename, root='./task_data')
+
 @bottle.get('/tasks')
 def list_tokens():
     response.content_type = 'application/json'
-    return os.listdir('./tasks')
+    return {
+        'tasks': os.listdir('./task_data')
+    }
+
+@bottle.get('/tasks.html')
+def list_tokens():
+
+    def make_li(dirname):
+        return "<li > <a href='/task_data/%s/status'> %s </a> </li>" % (dirname, dirname)
+
+    response.content_type = 'text/html'
+    return """
+    <h1> Hi </h1>
+
+    <ol>
+
+    """ + \
+    " ".join(make_li(dirname) for dirname in os.listdir('./task_data')) + \
+    """
+
+    </ol>
+
+    """
 
 @bottle.get('/task/<name>')
 def get_task(name):
-    with open ('./tasks/' + name + '.status', 'r') as f:
+    with open ('./task_data/' + name + '.status', 'r') as f:
         return '\n'.join(f.readlines())
 
 try:
