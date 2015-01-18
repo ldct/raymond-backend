@@ -74,7 +74,7 @@ def list_tokens():
 
 @bottle.get('/task/<name>')
 def get_task(name):
-    with open ('./task_data/' + name + '.status', 'r') as f:
+    with open ('./task_data/' + name + '/status', 'r') as f:
         return '\n'.join(f.readlines())
 
 try:
