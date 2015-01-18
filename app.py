@@ -70,7 +70,7 @@ def list_tokens():
 
 @bottle.get('/batch_tasks')
 def batch_tasks():
-    print(request.query.gt('tokens'))
+    print(request.query.get('tokens'))
 
 @bottle.get('/task/<name>')
 def get_task(name):
