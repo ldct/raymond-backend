@@ -3,8 +3,8 @@
   "time":"4:38 PM",
   "location":"Mel's",
   "items": [
-    { "2 Beef Burger Side Fries" : "19.90" },
-    { "1 Bud Light" : "3.79" },
-    { "1 Bud" : "4.50" }
+    { "item" : "2 Beef Burger Side Fries", "price" : "3.79" },
+    { "item" : "1 Bud Light", "price" : "3.79" },
+    { "item" : "1 Bud", "price" : "4.50" }
   ]
 }
