@@ -29,6 +29,8 @@ def create_task():
 
     task_id = binascii.hexlify(os.urandom(8))
 
+    print(request.query.get('category'))
+
     os.mkdir('./task_data/' + task_id)
     with open('./task_data/' + task_id + '/status', 'a') as f:
         f.write('queued\n')
