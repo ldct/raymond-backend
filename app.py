@@ -28,8 +28,7 @@ def create_task():
     response.content_type = 'application/json'
 
     task_id = binascii.hexlify(os.urandom(8))
-
-    print(request.query.get('category'))
+    category = request.query.get('category')
 
     os.mkdir('./task_data/' + task_id)
     with open('./task_data/' + task_id + '/status', 'a') as f:
@@ -39,6 +38,9 @@ def create_task():
 
     with open('./task_data/' + task_id + '/image.jpg', 'wb') as f:
         f.write(s)
+
+    with open('./task_data/' + task_id + '/category', 'w') as f:
+        f.write(category)
 
     return task_id
 
