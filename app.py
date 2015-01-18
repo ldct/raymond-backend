@@ -76,6 +76,8 @@ def list_tokens():
 @bottle.get('/batch_tasks')
 def batch_tasks():
 
+    response.content_type = "application/json"
+
     def get_refresh(token):
         with open('./task_data/' + token + '/status', 'r') as f:
             if 'done' not in f.read():
@@ -96,7 +98,7 @@ def batch_tasks():
     for (token, res) in refreshed:
         ret[token] = res
 
-    print(ret)
+    return ret
 
 @bottle.get('/task/<name>')
 def get_task(name):
