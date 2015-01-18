@@ -70,8 +70,17 @@ def list_tokens():
 
 @bottle.get('/batch_tasks')
 def batch_tasks():
+
+    def get_refresh(token):
+        with open('./task_data/' + token + '/status', 'r') as f:
+            if 'done' not in f.read():
+                continue
+            else:
+                print('done', token)
+
     tokens = request.query.get('tokens').split(',')
     print(tokens)
+    print(list(get_refresh(token) for token in tokens))
 
 @bottle.get('/task/<name>')
 def get_task(name):
