@@ -83,7 +83,7 @@ def batch_tasks():
             else:
 
                 with open('./task_data/' + token + '/result.json', 'r') as f:
-                    data = json.loads(f)
+                    data = json.load(f)
 
                 return (token, data)
 
