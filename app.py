@@ -48,13 +48,6 @@ def create_task():
 def get_task_data(filename):
     return bottle.static_file(filename, root='./task_data')
 
-@bottle.get('/tasks')
-def list_tokens():
-    response.content_type = 'application/json'
-    return {
-        'tasks': os.listdir('./task_data')
-    }
-
 @bottle.get('/tasks.html')
 def list_tokens():
 
@@ -74,6 +67,10 @@ def list_tokens():
     </ol>
 
     """
+
+@bottle.get('/batch_tasks')
+def batch_tasks():
+    print(request.query.gt('tokens'))
 
 @bottle.get('/task/<name>')
 def get_task(name):
