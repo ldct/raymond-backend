@@ -16,12 +16,12 @@ def enable_cors():
 @bottle.get('/')
 def health():
     response.content_type = 'application/json'
-    if os.path.isdir("./tasks"):
+    if os.path.isdir("./task_data"):
         return { 'status': 'ok' }
     else:
         return {
             'status': 'bad',
-            'message': 'tasks directory does not exist'
+            'message': 'task_data directory does not exist'
 	}
 @bottle.post('/task')
 def create_task():
@@ -29,14 +29,14 @@ def create_task():
 
     task_id = binascii.hexlify(os.urandom(8))
 
-    os.mkdir('./tasks/' + task_id)
-    with open('./tasks/' + task_id + '/status', 'a') as f:
+    os.mkdir('./task_data/' + task_id)
+    with open('./task_data/' + task_id + '/status', 'a') as f:
         f.write('queued')
 
     s = request.body.read()
     print(s)
 
-    with open('./tasks/' + task_id + '/image.jpg', 'wb') as f:
+    with open('./task_data/' + task_id + '/image.jpg', 'wb') as f:
         f.write(s)
 
     return task_id
