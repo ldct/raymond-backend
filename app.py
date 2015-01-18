@@ -29,18 +29,21 @@ def create_task():
 
     task_id = binascii.hexlify(os.urandom(8))
     category = request.query.get('category')
+    img_bytes = request.body.read()
 
     os.mkdir('./task_data/' + task_id)
+
     with open('./task_data/' + task_id + '/status', 'a') as f:
         f.write('queued\n')
 
-    s = request.body.read()
-
     with open('./task_data/' + task_id + '/image.jpg', 'wb') as f:
-        f.write(s)
+        f.write(img_bytes)
 
     with open('./task_data/' + task_id + '/category', 'w') as f:
         f.write(category)
+
+    with open('./task_data/' + task_id + '/result.json', 'w') as f:
+        f.write('{}')
 
     return task_id
 
