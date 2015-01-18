@@ -88,8 +88,11 @@ def batch_tasks():
                 return (token, data)
 
     tokens = request.query.get('tokens').split(',')
-    print(tokens)
-    print(list(get_refresh(token) for token in tokens))
+    refreshed = list(get_refresh(token) for token in tokens)
+
+    refreshed = [r for r in refreshed if r is not None]
+
+    print(refreshed)
 
 @bottle.get('/task/<name>')
 def get_task(name):
