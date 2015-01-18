@@ -36,7 +36,6 @@ def create_task():
         f.write('queued\n')
 
     s = request.body.read()
-    print(s)
 
     with open('./task_data/' + task_id + '/image.jpg', 'wb') as f:
         f.write(s)
