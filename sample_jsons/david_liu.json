@@ -1,7 +1,7 @@
 {
-    "Name": "David Liu",
-    "Phone Number": "6478369673",
-    "Email":"david-lky@hotmail.com",
-    "Job" : "Front End Designer",
-    "Company" : "Self Employeed"
+    "name": "David Liu",
+    "phone": "6478369673",
+    "email":"david-lky@hotmail.com",
+    "job" : "Front End Designer",
+    "company" : "Self Employeed"
 }
