@@ -92,7 +92,11 @@ def batch_tasks():
 
     refreshed = [r for r in refreshed if r is not None]
 
-    print(refreshed)
+    ret = {}
+    for (token, res) in refreshed:
+        ret[token] = res
+
+    print(ret)
 
 @bottle.get('/task/<name>')
 def get_task(name):
