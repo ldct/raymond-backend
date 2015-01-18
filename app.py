@@ -79,15 +79,18 @@ def batch_tasks():
     response.content_type = "application/json"
 
     def get_refresh(token):
-        with open('./task_data/' + token + '/status', 'r') as f:
-            if 'done' not in f.read():
-                return None
-            else:
+        try:
+            with open('./task_data/' + token + '/status', 'r') as f:
+                if 'done' not in f.read():
+                    return None
+                else:
 
-                with open('./task_data/' + token + '/result.json', 'r') as f:
-                    data = json.load(f)
+                    with open('./task_data/' + token + '/result.json', 'r') as f:
+                        data = json.load(f)
 
-                return (token, data)
+                    return (token, data)
+        except IOError:
+            pass
 
     tokens = request.query.get('tokens').split(',')
     refreshed = list(get_refresh(token) for token in tokens)
