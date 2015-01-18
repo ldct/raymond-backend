@@ -7,6 +7,8 @@ from bottle import response, request
 
 from binascii import unhexlify
 
+import json
+
 @bottle.hook('after_request')
 def enable_cors():
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -79,7 +81,11 @@ def batch_tasks():
             if 'done' not in f.read():
                 return None
             else:
-                return token
+
+                with open('./task_data/' + token + '/result.json', 'r') as f:
+                    data = json.loads(f)
+
+                return (token, data)
 
     tokens = request.query.get('tokens').split(',')
     print(tokens)
