@@ -74,9 +74,9 @@ def batch_tasks():
     def get_refresh(token):
         with open('./task_data/' + token + '/status', 'r') as f:
             if 'done' not in f.read():
-                break
+                return None
             else:
-                print('done', token)
+                return token
 
     tokens = request.query.get('tokens').split(',')
     print(tokens)
