@@ -47,6 +47,7 @@ def create_task():
     with open('./task_data/' + task_id + '/result.json', 'w') as f:
         f.write('{}')
 
+    print(task_id)
     return task_id
 
 @bottle.get('/task_data/<filename:path>')
